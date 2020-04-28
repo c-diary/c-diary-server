@@ -1,0 +1,19 @@
+version: "3"
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      PORT: ${PORT}
+    ports:
+      - ${PORT}:${PORT}
+
+  postgres:
+    image: postgres:11.2-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
